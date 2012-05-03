@@ -116,22 +116,19 @@ public class XMLReferences extends SimpleList<XMLReference>{
 		}
 	}
 	
-	/* getter and setter */
-	
+	/* 
+	 * getter and setter 
+	 */
 	public XMLReferenceSymbol getSuperReferenceSymbol() {
 		return superReferenceSymbol;
 	}
-
 	public void setSuperReferenceSymbol(XMLReferenceSymbol superReferenceSymbol) {
 		this.superReferenceSymbol = superReferenceSymbol;
 	}
-
 	public XMLModel getSuperModel() {
 		return superModel;
 	}
-
 	public void setSuperModel(XMLModel superModel) {
 		this.superModel = superModel;
 	}
-	
 }

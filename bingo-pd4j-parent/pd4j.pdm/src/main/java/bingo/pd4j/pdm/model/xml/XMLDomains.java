@@ -116,28 +116,19 @@ public class XMLDomains extends SimpleList<XMLPhysicalDomain>{
 		}
 	}
 
+	/*
+	 * getter and setter.
+	 */
 	public XMLModel getSuperModel() {
 		return superModel;
 	}
-
 	public void setSuperModel(XMLModel superModel) {
 		this.superModel = superModel;
 	}
-
-	public SimpleList<String> getIdList() {
-		return idList;
-	}
-
-	public void setIdList(SimpleList<String> idList) {
-		this.idList = idList;
-	}
-
 	public XMLColumn getSuperColumn() {
 		return superColumn;
 	}
-
 	public void setSuperColumn(XMLColumn superColumn) {
 		this.superColumn = superColumn;
 	}
-
 }

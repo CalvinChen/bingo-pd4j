@@ -114,19 +114,46 @@ public class XMLColumns extends SimpleList<XMLColumn>{
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see bingo.pd4j.pdm.model.api.SimpleList#get(int)
+	/**
+	 * get the {@link XMLColumn} by the given index.
 	 */
-	@Override
-	public XMLColumn get(int index) {
+	public XMLColumn get(int index){
+		initInnerList();
+		return super.get(index);
+	}
+	
+	/**
+	 * get the {@link XMLColumn} by the given name.
+	 */
+	public XMLColumn get(String name){
+		initInnerList();
+		for (XMLColumn one : getList()) {
+	        if(one.getName().equals(name)){
+	        	return one;
+	        }
+        }
+		return null;
+	}
+	
+	/**
+	 * when this class has ref to some {@link XMLColumn}, 
+	 * if it's the first time to visit the list,
+	 * the inner list will init from the id list.
+	 */
+	private void initInnerList(){
 		if(isListNull() && idList != null){
 			for (String id : idList) {
 	            add((XMLColumn) IdCollector.get(id));
             }
+		} else if(isListNull() && idList == null){
+			log.warn(WARN_NO_INNER_LIST_NAME, "XMLColumns");
 		}
-		return super.get(index);
 	}
 	
+	
+	/*
+	 * getter and setter.
+	 */
 	public XMLTable getSuperTable() {
 		return superTable;
 	}
@@ -138,12 +165,6 @@ public class XMLColumns extends SimpleList<XMLColumn>{
 	}
 	public void setSuperKey(XMLKey superKey) {
 		this.superKey = superKey;
-	}
-	public SimpleList<String> getIdList() {
-		return idList;
-	}
-	public void setIdList(SimpleList<String> idList) {
-		this.idList = idList;
 	}
 	public XMLIndexColumn getSuperIndexColumn() {
 		return superIndexColumn;

@@ -139,28 +139,24 @@ public class XMLTables extends SimpleList<XMLTable>{
 		}
 	}
 	
-	/* getter and setter */
-
+	/* 
+	 * getter and setter 
+	 */
 	public XMLReference getSuperReference() {
 		return superReference;
 	}
-
 	public void setSuperReference(XMLReference superReference) {
 		this.superReference = superReference;
 	}
-
 	public XMLTableSymbol getSuperTableSymbol() {
 		return superTableSymbol;
 	}
-
 	public void setSuperTableSymbol(XMLTableSymbol superTableSymbol) {
 		this.superTableSymbol = superTableSymbol;
 	}
-
 	public XMLModel getSuperModel() {
 		return superModel;
 	}
-
 	public void setSuperModel(XMLModel superModel) {
 		this.superModel = superModel;
 	}

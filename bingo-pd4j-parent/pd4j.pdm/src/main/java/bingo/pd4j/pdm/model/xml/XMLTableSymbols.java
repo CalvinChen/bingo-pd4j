@@ -15,7 +15,7 @@
  */
 package bingo.pd4j.pdm.model.xml;
 
-import static bingo.pd4j.pdm.internal.LogUtil.INITIALLIZED_NAME;
+import static bingo.pd4j.pdm.internal.LogUtil.*;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodeText;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodes;
 import static bingo.pd4j.pdm.util.PdmNodeName.META_REF;
@@ -27,6 +27,7 @@ import org.dom4j.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import bingo.pd4j.pdm.internal.IdCollector;
 import bingo.pd4j.pdm.model.api.SimpleList;
 import bingo.pd4j.pdm.util.ListUtil;
 
@@ -60,15 +61,33 @@ public class XMLTableSymbols extends SimpleList<XMLTableSymbol>{
 			log.debug(INITIALLIZED_NAME, "TableSymbol");
 		}
 	}
-
-	public SimpleList<String> getIdList() {
-		return idList;
+	
+	/**
+	 * get the {@link XMLTableSymbol} by the given index.
+	 */
+	public XMLTableSymbol get(int index){
+		initInnerList();
+		return super.get(index);
+	}
+	
+	/**
+	 * when this class has ref to some {@link XMLTableSymbol}, 
+	 * if it's the first time to visit the list,
+	 * the inner list will init from the id list.
+	 */
+	private void initInnerList(){
+		if(isListNull() && idList != null){
+			for (String id : idList) {
+	            add((XMLTableSymbol) IdCollector.get(id));
+            }
+		} else if(isListNull() && idList == null){
+			log.warn(WARN_NO_INNER_LIST_NAME, "0000");
+		}
 	}
 
-	public void setIdList(SimpleList<String> idList) {
-		this.idList = idList;
-	}
-
+	/*
+	 * getter and setter.
+	 */
 	public XMLReferenceSymbol getSuperReferenceSymbol() {
 		return superReferenceSymbol;
 	}

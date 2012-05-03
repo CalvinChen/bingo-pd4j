@@ -24,7 +24,7 @@ import java.util.ListIterator;
 /**
  * <code>{@link SimpleList}</code>
  *
- * an abstract class that implements most interface methods, represents a simple named list.
+ * an abstract class that implements most interface methods, represents a simple list.
  *
  * @author Calvin Chen
  * @param <T>

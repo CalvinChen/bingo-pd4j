@@ -116,22 +116,19 @@ public class XMLPackages extends SimpleList<XMLPackage>{
 		}
 	}
 	
-	/* getter and setter */
-
+	/* 
+	 * getter and setter
+	 */
 	public XMLPackageSymbol getSuperPackageSymbol() {
 		return superPackageSymbol;
 	}
-
 	public void setSuperPackageSymbol(XMLPackageSymbol superPackageSymbol) {
 		this.superPackageSymbol = superPackageSymbol;
 	}
-
 	public XMLModel getSuperModel() {
 		return superModel;
 	}
-
 	public void setSuperModel(XMLModel superModel) {
 		this.superModel = superModel;
 	}
-
 }

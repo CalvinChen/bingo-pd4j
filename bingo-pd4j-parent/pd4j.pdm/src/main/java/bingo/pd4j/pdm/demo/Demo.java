@@ -15,6 +15,8 @@
  */
 package bingo.pd4j.pdm.demo;
 
+import java.util.List;
+
 import org.dom4j.DocumentException;
 
 import bingo.pd4j.pdm.PdmReader;
@@ -35,6 +37,7 @@ import bingo.pd4j.pdm.model.Table;
 import bingo.pd4j.pdm.model.Tables;
 import bingo.pd4j.pdm.model.Value;
 import bingo.pd4j.pdm.model.Values;
+import bingo.pd4j.pdm.model.xml.XMLPackage;
 
 /**
  * <code>{@link Demo}</code>
@@ -50,7 +53,7 @@ public class Demo {
 		PDM pdm = PdmReader.read("test.pdm");
 		
 		/* get all packages */
-		Packages packages = pdm.getPackages();
+		List<XMLPackage> packages = pdm.listPackages();
 		
 		/* get all package names */
 		String[] packageNames = packages.getNames();

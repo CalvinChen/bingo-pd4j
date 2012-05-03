@@ -97,37 +97,62 @@ public class XMLKeys extends SimpleList<XMLKey>{
 			log.debug(INITIALLIZED_NAME, "XMLKeys");
 		}
 	}
+	
+	/**
+	 * get the {@link XMLKey} by the given index.
+	 */
+	public XMLKey get(int index){
+		initInnerList();
+		return super.get(index);
+	}
+	
+	/**
+	 * get the {@link XMLKey} by the given name.
+	 */
+	public XMLKey get(String name){
+		initInnerList();
+		for (XMLKey one : getList()) {
+	        if(one.getName().equals(name)){
+	        	return one;
+	        }
+        }
+		return null;
+	}
+	
+	/**
+	 * when this class has ref to some {@link XMLKey}, 
+	 * if it's the first time to visit the list,
+	 * the inner list will init from the id list.
+	 */
+	private void initInnerList(){
+		if(isListNull() && idList != null){
+			for (String id : idList) {
+	            add((XMLKey) IdCollector.get(id));
+            }
+		} else if(isListNull() && idList == null){
+			log.warn(WARN_NO_INNER_LIST_NAME, "XMLKeys");
+		}
+	}
 
+	/*
+	 * getter and setter.
+	 */
 	public XMLTable getSuperTable() {
 		return superTable;
 	}
-
 	public void setSuperTable(XMLTable superTable) {
 		this.superTable = superTable;
 	}
-
 	public XMLIndex getSuperIndex() {
 		return superIndex;
 	}
-
 	public void setSuperIndex(XMLIndex superIndex) {
 		this.superIndex = superIndex;
 	}
-
-	public SimpleList<String> getIdList() {
-		return idList;
-	}
-
-	public void setIdList(SimpleList<String> idList) {
-		this.idList = idList;
-	}
-
 	public XMLReference getSuperReference() {
 		return superReference;
 	}
-
 	public void setSuperReference(XMLReference superReference) {
 		this.superReference = superReference;
 	}
-
 }

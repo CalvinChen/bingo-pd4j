@@ -83,13 +83,45 @@ public class XMLPhysicalDiagrams extends SimpleList<XMLPhysicalDiagram>{
 		}
 	}
 
-	public SimpleList<String> getIdList() {
-		return idList;
+	/**
+	 * get the {@link XMLPhysicalDiagram} by the given index.
+	 */
+	public XMLPhysicalDiagram get(int index){
+		initInnerList();
+		return super.get(index);
 	}
-	public void setIdList(SimpleList<String> idList) {
-		this.idList = idList;
+	
+	/**
+	 * get the {@link XMLPhysicalDiagram} by the given name.
+	 */
+	public XMLPhysicalDiagram get(String name){
+		initInnerList();
+		for (XMLPhysicalDiagram one : getList()) {
+	        if(one.getName().equals(name)){
+	        	return one;
+	        }
+        }
+		return null;
 	}
-
+	
+	/**
+	 * when this class has ref to some {@link XMLPhysicalDiagram}, 
+	 * if it's the first time to visit the list,
+	 * the inner list will init from the id list.
+	 */
+	private void initInnerList(){
+		if(isListNull() && idList != null){
+			for (String id : idList) {
+	            add((XMLPhysicalDiagram) IdCollector.get(id));
+            }
+		} else if(isListNull() && idList == null){
+			log.warn(WARN_NO_INNER_LIST_NAME, "XMLPhysicalDiagrams");
+		}
+	}
+	
+	/*
+	 * getter and setter.
+	 */
 	public XMLPackage getSuperPackage() {
 		return superPackage;
 	}

@@ -15,7 +15,7 @@
  */
 package bingo.pd4j.pdm.model.xml;
 
-import static bingo.pd4j.pdm.internal.LogUtil.INITIALLIZED_NAME_VALUE;
+import static bingo.pd4j.pdm.internal.LogUtil.*;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodeText;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodes;
 import static bingo.pd4j.pdm.util.PdmNodeName.A_CODE;
@@ -39,6 +39,7 @@ import org.dom4j.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import bingo.pd4j.pdm.internal.IdCollector;
 import bingo.pd4j.pdm.model.api.SimpleList;
 import bingo.pd4j.pdm.model.api.WithId;
 import bingo.pd4j.pdm.util.ListUtil;
@@ -49,7 +50,7 @@ import bingo.pd4j.pdm.util.ListUtil;
  *
  * @author Calvin Chen
  */
-public class XMLShortcut implements WithId {
+public class XMLShortcut extends SimpleList<XMLShortcut> implements WithId {
 	
 	private static final Logger log = LoggerFactory.getLogger(XMLShortcut.class);
 	
@@ -130,134 +131,135 @@ public class XMLShortcut implements WithId {
 
 		log.debug(INITIALLIZED_NAME_VALUE, "XMLShortcut", getName());
 	}
+	
+	/**
+	 * get the {@link XMLShortcut} by the given index.
+	 */
+	public XMLShortcut get(int index){
+		initInnerList();
+		return super.get(index);
+	}
+	
+	/**
+	 * get the {@link XMLShortcut} by the given name.
+	 */
+	public XMLShortcut get(String name){
+		initInnerList();
+		for (XMLShortcut one : getList()) {
+	        if(one.getName().equals(name)){
+	        	return one;
+	        }
+        }
+		return null;
+	}
+	
+	/**
+	 * when this class has ref to some {@link XMLShortcut}, 
+	 * if it's the first time to visit the list,
+	 * the inner list will init from the id list.
+	 */
+	private void initInnerList(){
+		if(isListNull() && idList != null){
+			for (String id : idList) {
+	            add((XMLShortcut) IdCollector.get(id));
+            }
+		} else if(isListNull() && idList == null){
+			log.warn(WARN_NO_INNER_LIST_NAME, "XMLShortcuts");
+		}
+	}
 
+	/*
+	 * getter and setter.
+	 */
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	public String getObjectId() {
 		return objectId;
 	}
-
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 	public String getCreationDate() {
 		return creationDate;
 	}
-
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
-
 	public String getCreator() {
 		return creator;
 	}
-
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
-
 	public String getModificationDate() {
 		return modificationDate;
 	}
-
 	public void setModificationDate(String modificationDate) {
 		this.modificationDate = modificationDate;
 	}
-
 	public String getModifier() {
 		return modifier;
 	}
-
 	public void setModifier(String modifier) {
 		this.modifier = modifier;
 	}
-
 	public String getTargetStereotype() {
 		return targetStereotype;
 	}
-
 	public void setTargetStereotype(String targetStereotype) {
 		this.targetStereotype = targetStereotype;
 	}
-
 	public String getTargetID() {
 		return targetID;
 	}
-
 	public void setTargetID(String targetID) {
 		this.targetID = targetID;
 	}
-
 	public String getTargetClassID() {
 		return targetClassID;
 	}
-
 	public void setTargetClassID(String targetClassID) {
 		this.targetClassID = targetClassID;
 	}
-
 	public String getTargetPackagePath() {
 		return targetPackagePath;
 	}
-
 	public void setTargetPackagePath(String targetPackagePath) {
 		this.targetPackagePath = targetPackagePath;
 	}
-
-	public SimpleList<String> getIdList() {
-		return idList;
-	}
-
-	public void setIdList(SimpleList<String> idList) {
-		this.idList = idList;
-	}
-
 	public XMLGenerationOrigins getSuperGenerationOrigins() {
 		return superGenerationOrigins;
 	}
-
 	public void setSuperGenerationOrigins(
 			XMLGenerationOrigins superGenerationOrigins) {
 		this.superGenerationOrigins = superGenerationOrigins;
 	}
-
 	public XMLDBMS getSuperDbms() {
 		return superDbms;
 	}
-
 	public void setSuperDbms(XMLDBMS superDbms) {
 		this.superDbms = superDbms;
 	}
-
 	public XMLShortcuts getSuperShortcuts() {
 		return superShortcuts;
 	}
-
 	public void setSuperShortcuts(XMLShortcuts superShortcuts) {
 		this.superShortcuts = superShortcuts;
 	}
-	
 }

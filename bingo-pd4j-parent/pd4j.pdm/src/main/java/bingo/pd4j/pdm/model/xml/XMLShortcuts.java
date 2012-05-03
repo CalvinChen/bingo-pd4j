@@ -15,7 +15,7 @@
  */
 package bingo.pd4j.pdm.model.xml;
 
-import static bingo.pd4j.pdm.internal.LogUtil.INITIALLIZED_NAME;
+import static bingo.pd4j.pdm.internal.LogUtil.*;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodeText;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodes;
 import static bingo.pd4j.pdm.util.PdmNodeName.META_REF;
@@ -82,28 +82,56 @@ public class XMLShortcuts extends SimpleList<XMLShortcut>{
 			log.debug(INITIALLIZED_NAME, "XMLShortcuts");
 		}
 	}
-
+	
+	/**
+	 * get the {@link XMLShortcut} by the given index.
+	 */
+	public XMLShortcut get(int index){
+		initInnerList();
+		return super.get(index);
+	}
+	
+	/**
+	 * get the {@link XMLShortcut} by the given name.
+	 */
+	public XMLShortcut get(String name){
+		initInnerList();
+		for (XMLShortcut one : getList()) {
+	        if(one.getName().equals(name)){
+	        	return one;
+	        }
+        }
+		return null;
+	}
+	
+	/**
+	 * when this class has ref to some {@link XMLShortcut}, 
+	 * if it's the first time to visit the list,
+	 * the inner list will init from the id list.
+	 */
+	private void initInnerList(){
+		if(isListNull() && idList != null){
+			for (String id : idList) {
+	            add((XMLShortcut) IdCollector.get(id));
+            }
+		} else if(isListNull() && idList == null){
+			log.warn(WARN_NO_INNER_LIST_NAME, "XMLShortcuts");
+		}
+	}
+	
+	/*
+	 * getter and setter.
+	 */
 	public XMLPackage getSuperPackage() {
 		return superPackage;
 	}
-
 	public void setSuperPackage(XMLPackage superPackage) {
 		this.superPackage = superPackage;
 	}
-
 	public XMLTargetModel getSuperTargetModel() {
 		return superTargetModel;
 	}
-
 	public void setSuperTargetModel(XMLTargetModel superTargetModel) {
 		this.superTargetModel = superTargetModel;
-	}
-
-	public SimpleList<String> getIdList() {
-		return idList;
-	}
-
-	public void setIdList(SimpleList<String> idList) {
-		this.idList = idList;
 	}
 }
