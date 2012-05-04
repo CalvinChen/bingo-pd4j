@@ -21,74 +21,76 @@ import bingo.pd4j.pdm.model.xml.XMLPhysicalDomain;
 /**
  * <code>{@link Domain}</code>
  *
- * TODO : document me
+ * represents a Domain in powerdesigner.
  *
  * @author Calvin Chen
  */
 public class Domain implements WithName{
 
+	/*
+	 * original xml nodes.
+	 */
 	private String name;
 	private String code;
+	private String comment;
 	private String dataType;
 	private String length;
 	private String precision;
+	
+	/*
+	 * added attributes.
+	 */
 	private StandardChecks standardChecks;
 	
-	private XMLPhysicalDomain xmlPhysicalDomain;
-
-	/**
-	 * 
+	/*
+	 * inner subclass.
 	 */
-	public Domain() {
-		super();
-	}
+	@SuppressWarnings("unused")
+    private XMLPhysicalDomain xmlPhysicalDomain;
 
+	/*
+	 * getter and setter.
+	 */
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
+	public String getComment() {
+    	return comment;
+    }
+	public void setComment(String comment) {
+    	this.comment = comment;
+    }
 	public String getDataType() {
 		return dataType;
 	}
-
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
 	}
-
 	public String getLength() {
     	return length;
     }
-
 	public void setLength(String length) {
     	this.length = length;
     }
-
 	public String getPrecision() {
     	return precision;
     }
-
 	public void setPrecision(String precision) {
     	this.precision = precision;
     }
-
 	public StandardChecks getStandardChecks() {
 		return standardChecks;
 	}
-
 	public void setStandardChecks(StandardChecks standardChecks) {
 		this.standardChecks = standardChecks;
 	}
-
 }

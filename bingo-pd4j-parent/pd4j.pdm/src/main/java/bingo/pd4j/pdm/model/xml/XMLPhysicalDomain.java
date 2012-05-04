@@ -17,22 +17,7 @@ package bingo.pd4j.pdm.model.xml;
 
 import static bingo.pd4j.pdm.internal.LogUtil.INITIALLIZED_NAME_VALUE;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodeText;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CODE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATOR;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_DATA_TYPE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_DEFAULT_VALUE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_HIGH_VALUE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_HISTORY;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_LENGTH;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_LIST_OF_VALUES;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_LOW_VALUE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFICATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFIER;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_NAME;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_OBJECT_ID;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_PRECISTION;
-import static bingo.pd4j.pdm.util.PdmNodeName.META_ID;
+import static bingo.pd4j.pdm.util.PdmNodeName.*;
 
 import org.dom4j.Node;
 import org.slf4j.Logger;
@@ -43,7 +28,7 @@ import bingo.pd4j.pdm.model.api.WithId;
 /**
  * <code>{@link XMLPhysicalDomain}</code>
  *
- * TODO : document me
+ * represents a XMLPhysicalDomain xml node in pdm file.
  *
  * @author Calvin Chen
  */
@@ -51,8 +36,10 @@ public class XMLPhysicalDomain extends Domain implements WithId{
 	
 	private static final Logger log = LoggerFactory.getLogger(XMLPhysicalDomain.class);
 
+	/*
+	 * original xml nodes.
+	 */
 	private String id;
-	
 	private String objectID;
 	private String creationDate;
 	private String creator;
@@ -65,6 +52,9 @@ public class XMLPhysicalDomain extends Domain implements WithId{
 	private String defaultValue;
 	private String listOfValues;
 	
+	/*
+	 * super nodes.
+	 */
 	private XMLDomains superDomains;
 	
 	/**
@@ -79,6 +69,7 @@ public class XMLPhysicalDomain extends Domain implements WithId{
 		setObjectID(getNodeText(A_OBJECT_ID, currentNode));
 		setName(getNodeText(A_NAME, currentNode));
 		setCode(getNodeText(A_CODE, currentNode));
+		setComment(getNodeText(A_COMMENT, currentNode));
 		setCreationDate(getNodeText(A_CREATION_DATE, currentNode));
 		setCreator(getNodeText(A_CREATOR, currentNode));
 		setModificationDate(getNodeText(A_MODIFICATION_DATE, currentNode));
@@ -95,8 +86,9 @@ public class XMLPhysicalDomain extends Domain implements WithId{
 		log.debug(INITIALLIZED_NAME_VALUE, "XMLPhysicalDomain", getName());
 	}
 
-	/* getter and setter */
-	
+	/* 
+	 * getter and setter.
+	 */
 	public String getObjectID() {
 		return objectID;
 	}
@@ -139,7 +131,6 @@ public class XMLPhysicalDomain extends Domain implements WithId{
 	public void setDatatype(String datatype) {
 		this.datatype = datatype;
 	}
-
 	public String getLowValue() {
 		return lowValue;
 	}
@@ -170,11 +161,9 @@ public class XMLPhysicalDomain extends Domain implements WithId{
 	public void setSuperDomains(XMLDomains superDomains) {
 		this.superDomains = superDomains;
 	}
-
 	public String getId() {
 	    return id;
     }
-
 	public void setId(String id) {
 		this.id = id;
     }

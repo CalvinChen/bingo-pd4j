@@ -18,48 +18,42 @@ package bingo.pd4j.pdm.model.xml;
 import static bingo.pd4j.pdm.internal.LogUtil.INITIALLIZED_NAME_VALUE;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNode;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodeText;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CODE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATOR;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_HISTORY;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFICATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFIER;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_NAME;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_OBJECT_ID;
-import static bingo.pd4j.pdm.util.PdmNodeName.C_KEY_COLUMNS;
-import static bingo.pd4j.pdm.util.PdmNodeName.META_ID;
+import static bingo.pd4j.pdm.util.PdmNodeName.*;
 
 import org.dom4j.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import bingo.pd4j.pdm.model.Key;
 import bingo.pd4j.pdm.model.api.WithId;
 /**
  * <code>{@link XMLKey}</code>
  *
- * TODO : document me
+ * represents a XMLKey xml node in pdm file.
  *
  * @author Calvin Chen
  */
-public class XMLKey implements WithId{
+public class XMLKey extends Key implements WithId{
 	
 	private static final Logger log = LoggerFactory.getLogger(XMLKey.class);
 
+	/*
+	 * original xml nodes.
+	 */
 	private String id;
-	
 	private String objectID;
-	private String name;
-	private String code;
 	private String creationDate;
 	private String creator;
 	private String modificationDate;
 	private String modifier;
 	private String history;
-
 	private XMLColumns keyColumns;
-	private String keyColumnsRefId;
 	
+	/*
+	 * super nodes.
+	 */
 	private XMLKeys superKeys;
+	
 	/**
 	 * @param node
 	 * @param xmlKeys
@@ -71,6 +65,7 @@ public class XMLKey implements WithId{
 		setObjectID(getNodeText(A_OBJECT_ID, currentNode));
 		setName(getNodeText(A_NAME, currentNode));
 		setCode(getNodeText(A_CODE, currentNode));
+		setComment(getNodeText(A_COMMENT, currentNode));
 		setCreationDate(getNodeText(A_CREATION_DATE, currentNode));
 		setCreator(getNodeText(A_CREATOR, currentNode));
 		setModificationDate(getNodeText(A_MODIFICATION_DATE, currentNode));
@@ -84,6 +79,10 @@ public class XMLKey implements WithId{
 		
 		log.debug(INITIALLIZED_NAME_VALUE, "XMLKey", getName());
 	}
+	
+	/*
+	 * getter and setter.
+	 */
 	public String getId() {
 		return id;
 	}
@@ -95,18 +94,6 @@ public class XMLKey implements WithId{
 	}
 	public void setObjectID(String objectID) {
 		this.objectID = objectID;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
 	}
 	public String getCreationDate() {
 		return creationDate;
@@ -143,12 +130,6 @@ public class XMLKey implements WithId{
 	}
 	public void setKeyColumns(XMLColumns keyColumns) {
 		this.keyColumns = keyColumns;
-	}
-	public String getKeyColumnsRefId() {
-		return keyColumnsRefId;
-	}
-	public void setKeyColumnsRefId(String keyColumnsRefId) {
-		this.keyColumnsRefId = keyColumnsRefId;
 	}
 	public XMLKeys getSuperKeys() {
 		return superKeys;

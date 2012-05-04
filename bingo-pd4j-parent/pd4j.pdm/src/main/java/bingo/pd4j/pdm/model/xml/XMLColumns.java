@@ -74,7 +74,6 @@ public class XMLColumns extends SimpleList<XMLColumn>{
 		
 		List<Node> nodeList = getNodes(O_COLUMN, currentNode);
 		if(ListUtil.isNotEmpty(nodeList)){
-			idList = new SimpleList<String>();
 			for (Node node : nodeList) {
 				idList.add(getNodeText(META_REF, node));
 			}

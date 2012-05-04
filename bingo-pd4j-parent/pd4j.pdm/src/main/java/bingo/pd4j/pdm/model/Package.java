@@ -21,25 +21,28 @@ import bingo.pd4j.pdm.model.xml.XMLPackage;
 /**
  * <code>{@link Package}</code>
  *
- * TODO : document me
+ * represents a Package in powerdesigner.
  *
  * @author Calvin Chen
  */
 public class Package implements WithName {
 
-	/**
-	 * the name of the package.
+	/*
+	 * original xml nodes.
 	 */
 	private String name;
-	/**
-	 * the code of the package.
-	 */
 	private String code;
+	private String comment;
 	
-	private XMLPackage xmlPackage;
+	/*
+	 * inner subclass.
+	 */
+	@SuppressWarnings("unused")
+    private XMLPackage xmlPackage;
 
-	/* getter and setter */
-
+	/*
+	 * getter and setter.
+	 */
 	public String getName() {
 		return name;
 	}
@@ -52,4 +55,10 @@ public class Package implements WithName {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	public String getComment() {
+    	return comment;
+    }
+	public void setComment(String comment) {
+    	this.comment = comment;
+    }
 }

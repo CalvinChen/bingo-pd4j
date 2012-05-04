@@ -15,52 +15,63 @@
  */
 package bingo.pd4j.pdm.model;
 
+import java.util.List;
+
 import bingo.pd4j.pdm.model.api.WithName;
+import bingo.pd4j.pdm.model.xml.XMLIndex;
 
 /**
  * <code>{@link Index}</code>
  *
- * TODO : document me
+ * represents a Index in powerdesigner.
  *
  * @author Calvin Chen
  */
 public class Index implements WithName{
 
+	/*
+	 * original xml nodes.
+	 */
 	private String name;
 	private String code;
 	private String comment;
-//	private IndexColumns indexColumns;
-
-	/**
-	 * 
+	
+	/*
+	 * added attributes.
 	 */
-	public Index() {
-		super();
-	}
+	private List<IndexColumn> columns;
 
+	/*
+	 * inner subclass.
+	 */
+	@SuppressWarnings("unused")
+    private XMLIndex xmlIndex;
+
+	/*
+	 * getter and setter.
+	 */
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 	public String getComment() {
 		return comment;
 	}
-
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
-
+	public List<IndexColumn> getColumns() {
+    	return columns;
+    }
+	public void setColumns(List<IndexColumn> columns) {
+    	this.columns = columns;
+    }
 }

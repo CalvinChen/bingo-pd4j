@@ -16,58 +16,60 @@
 package bingo.pd4j.pdm.model;
 
 import bingo.pd4j.pdm.model.api.WithName;
+import bingo.pd4j.pdm.model.xml.XMLKey;
 
 /**
  * <code>{@link Key}</code>
  *
- * TODO : document me
+ * represents a Key in powerdesigner.
  *
  * @author Calvin Chen
  */
 public class Key implements WithName{
 
+	/*
+	 * original xml nodes.
+	 */
 	private String name;
 	private String code;
 	private String comment;
+	
+	/*
+	 * added attributes.
+	 */
 	private Boolean isPrimaryKey;
 
-	/**
-	 * 
+	/*
+	 * inner subclass.
 	 */
-	public Key() {
-		super();
-	}
+	@SuppressWarnings("unused")
+    private XMLKey xmlKey;
 
+	/*
+	 * getter and setter.
+	 */
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
 	public String getComment() {
 		return comment;
 	}
-
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
 	public Boolean getIsPrimaryKey() {
 		return isPrimaryKey;
 	}
-
 	public void setIsPrimaryKey(Boolean isPrimaryKey) {
 		this.isPrimaryKey = isPrimaryKey;
 	}
-
 }

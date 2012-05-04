@@ -16,112 +16,103 @@
 package bingo.pd4j.pdm.model;
 
 import bingo.pd4j.pdm.model.api.WithName;
+import bingo.pd4j.pdm.model.xml.XMLColumn;
 
 /**
  * <code>{@link Column}</code>
  *
- * TODO : document me
+ * represents a simple column in powerdesigner.
  *
  * @author Calvin Chen
  */
 public class Column implements WithName{
 
+	/*
+	 * original xml nodes.
+	 */
 	private String name;
 	private String code;
 	private String comment;
 	private String dataType;
-	private Integer length;
-	private Integer precision;
+	private String length;
+	private String precision;
+	
+	/*
+	 * added attributes.
+	 */
 	private Domain domain;
 	private Boolean isPrimaryKey;
 	private Boolean isForeignKey;
 	private StandardChecks standChecks;
-
-	/**
-	 * 
+	
+	/*
+	 * inner subclass.
 	 */
-	public Column() {
-		super();
-	}
-
-	public StandardChecks getStandChecks() {
-		return standChecks;
-	}
-
-	public void setStandChecks(StandardChecks standChecks) {
-		this.standChecks = standChecks;
-	}
-
+	@SuppressWarnings("unused")
+    private XMLColumn xmlColumn;
+	
+	/*
+	 * getter and setter.
+	 */
 	public String getName() {
-		return name;
-	}
-
+    	return name;
+    }
 	public void setName(String name) {
-		this.name = name;
-	}
-
+    	this.name = name;
+    }
 	public String getCode() {
-		return code;
-	}
-
+    	return code;
+    }
 	public void setCode(String code) {
-		this.code = code;
-	}
-
+    	this.code = code;
+    }
 	public String getComment() {
-		return comment;
-	}
-
+    	return comment;
+    }
 	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
+    	this.comment = comment;
+    }
 	public String getDataType() {
-		return dataType;
-	}
-
+    	return dataType;
+    }
 	public void setDataType(String dataType) {
-		this.dataType = dataType;
-	}
-
-	public Integer getLength() {
-		return length;
-	}
-
-	public void setLength(Integer length) {
-		this.length = length;
-	}
-
-	public Integer getPrecision() {
-		return precision;
-	}
-
-	public void setPrecision(Integer precision) {
-		this.precision = precision;
-	}
-
+    	this.dataType = dataType;
+    }
+	public String getLength() {
+    	return length;
+    }
+	public void setLength(String length) {
+    	this.length = length;
+    }
+	public String getPrecision() {
+    	return precision;
+    }
+	public void setPrecision(String precision) {
+    	this.precision = precision;
+    }
 	public Domain getDomain() {
-		return domain;
-	}
-
+    	return domain;
+    }
 	public void setDomain(Domain domain) {
-		this.domain = domain;
-	}
-
+    	this.domain = domain;
+    }
 	public Boolean getIsPrimaryKey() {
-		return isPrimaryKey;
-	}
-
+    	return isPrimaryKey;
+    }
 	public void setIsPrimaryKey(Boolean isPrimaryKey) {
-		this.isPrimaryKey = isPrimaryKey;
-	}
-
+    	this.isPrimaryKey = isPrimaryKey;
+    }
 	public Boolean getIsForeignKey() {
-		return isForeignKey;
-	}
-
+    	return isForeignKey;
+    }
 	public void setIsForeignKey(Boolean isForeignKey) {
-		this.isForeignKey = isForeignKey;
-	}
+    	this.isForeignKey = isForeignKey;
+    }
+	public StandardChecks getStandChecks() {
+    	return standChecks;
+    }
+	public void setStandChecks(StandardChecks standChecks) {
+    	this.standChecks = standChecks;
+    }
 
 }

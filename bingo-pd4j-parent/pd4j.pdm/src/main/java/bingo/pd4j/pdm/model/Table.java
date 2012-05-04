@@ -21,16 +21,22 @@ import bingo.pd4j.pdm.model.xml.XMLTable;
 /**
  * <code>{@link Table}</code>
  *
- * TODO : document me
+ * represents a Table in powerdesigner.
  *
  * @author Calvin Chen
  */
 public class Table implements WithName{
 
+	/*
+	 * original xml nodes.
+	 */
 	private String name;
 	private String code;
 	private String comment;
 	
+	/*
+	 * inner subclass.
+	 */
 	private XMLTable xmlTable;
 
 	/**
@@ -62,7 +68,7 @@ public class Table implements WithName{
 	}
 	
 	/* 
-	 * Normal getter and setter
+	 * getter and setter.
 	 */
 	public String getComment() {
 		return comment;

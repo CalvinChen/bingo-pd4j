@@ -27,17 +27,10 @@ public class IndexColumn extends Column{
 	
 	private Boolean isAscending = true;
 
-	public String getName() {
-		// TODO implement Named.getName
-		return null;
-	}
-
 	public Boolean getIsAscending() {
 		return isAscending;
 	}
-
 	public void setIsAscending(Boolean isAscending) {
 		this.isAscending = isAscending;
 	}
-	
 }

@@ -18,20 +18,7 @@ package bingo.pd4j.pdm.model.xml;
 import static bingo.pd4j.pdm.internal.LogUtil.INITIALLIZED_NAME_VALUE;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNode;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodeText;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CODE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATOR;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_HISTORY;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFICATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFIER;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_NAME;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_OBJECT_ID;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_USE_PARENT_NAME_SPACE;
-import static bingo.pd4j.pdm.util.PdmNodeName.C_DEFAULT_DIAGRAM;
-import static bingo.pd4j.pdm.util.PdmNodeName.C_PHYSICAL_DIAGRAMS;
-import static bingo.pd4j.pdm.util.PdmNodeName.C_REFERENCES;
-import static bingo.pd4j.pdm.util.PdmNodeName.C_TABLES;
-import static bingo.pd4j.pdm.util.PdmNodeName.META_ID;
+import static bingo.pd4j.pdm.util.PdmNodeName.*;
 
 import org.dom4j.Node;
 import org.slf4j.Logger;
@@ -42,7 +29,7 @@ import bingo.pd4j.pdm.model.api.WithId;
 /**
  * <code>{@link XMLPackage}</code>
  *
- * TODO : document me
+ * represents a XMLPackage xml node in pdm file.
  *
  * @author Calvin Chen
  */
@@ -50,8 +37,10 @@ public class XMLPackage extends Package implements WithId {
 	
 	private static final Logger log = LoggerFactory.getLogger(XMLPackage.class);
 
+	/*
+	 * original xml nodes.
+	 */
 	private String id;
-
 	private String objectID;
 	private String creationDate;
 	private String creator;
@@ -65,7 +54,11 @@ public class XMLPackage extends Package implements WithId {
 	private XMLShortcuts tables;
 	private XMLShortcuts references;
 	
+	/*
+	 * super nodes.
+	 */
 	private XMLPackages superPackages;
+	
 	/**
 	 * @param node
 	 * @param xmlPackages
@@ -77,6 +70,7 @@ public class XMLPackage extends Package implements WithId {
 		setObjectID(getNodeText(A_OBJECT_ID, currentNode));
 		setName(getNodeText(A_NAME, currentNode));
 		setCode(getNodeText(A_CODE, currentNode));
+		setComment(getNodeText(A_COMMENT, currentNode));
 		setCreationDate(getNodeText(A_CREATION_DATE, currentNode));
 		setCreator(getNodeText(A_CREATOR, currentNode));
 		setModificationDate(getNodeText(A_MODIFICATION_DATE, currentNode));
@@ -106,6 +100,10 @@ public class XMLPackage extends Package implements WithId {
 		
 		log.debug(INITIALLIZED_NAME_VALUE, "XMLPackage", getName());
 	}
+	
+	/*
+	 * getter and setter.
+	 */
 	public String getId() {
 		return id;
 	}

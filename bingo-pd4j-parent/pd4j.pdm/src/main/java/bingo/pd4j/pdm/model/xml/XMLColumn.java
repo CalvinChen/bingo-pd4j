@@ -18,54 +18,41 @@ package bingo.pd4j.pdm.model.xml;
 import static bingo.pd4j.pdm.internal.LogUtil.INITIALLIZED_NAME_VALUE;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNode;
 import static bingo.pd4j.pdm.util.PdmNodeFinder.getNodeText;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CODE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_COLUMN_MANDATORY;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_CREATOR;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_DATA_TYPE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_HISTORY;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_LENGTH;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFICATION_DATE;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_MODIFIER;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_NAME;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_OBJECT_ID;
-import static bingo.pd4j.pdm.util.PdmNodeName.A_PRECISTION;
-import static bingo.pd4j.pdm.util.PdmNodeName.C_DOMAIN;
-import static bingo.pd4j.pdm.util.PdmNodeName.META_ID;
+import static bingo.pd4j.pdm.util.PdmNodeName.*;
 
 import org.dom4j.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import bingo.pd4j.pdm.model.Column;
 import bingo.pd4j.pdm.model.api.WithId;
 /**
  * <code>{@link XMLColumn}</code>
  *
- * TODO : document me
+ * represents a XMLColumn xml node in pdm file.
  *
  * @author Calvin Chen
  */
-public class XMLColumn implements WithId{
+public class XMLColumn extends Column implements WithId{
 	
 	private static final Logger log = LoggerFactory.getLogger(XMLColumn.class);
 	
+	/*
+	 * original xml nodes.
+	 */
 	private String id;
-
 	private String objectID;
-	private String name;
-	private String code;
 	private String creationDate;
 	private String creator;
 	private String modificationDate;
 	private String modifier;
 	private String history;
-	private String dataType;
-	private String length;
-	private String precision;
 	private String columnMandatory;
+	private XMLDomains domains;
 	
-	private XMLDomains domain;
-	
+	/*
+	 * super nodes.
+	 */
 	private XMLColumns superColumns;
 
 	/**
@@ -79,6 +66,7 @@ public class XMLColumn implements WithId{
 		setObjectID(getNodeText(A_OBJECT_ID, currentNode));
 		setName(getNodeText(A_NAME, currentNode));
 		setCode(getNodeText(A_CODE, currentNode));
+		setComment(getNodeText(A_COMMENT, currentNode));
 		setCreationDate(getNodeText(A_CREATION_DATE, currentNode));
 		setCreator(getNodeText(A_CREATOR, currentNode));
 		setModificationDate(getNodeText(A_MODIFICATION_DATE, currentNode));
@@ -91,130 +79,73 @@ public class XMLColumn implements WithId{
 		
 		Node node = getNode(C_DOMAIN, currentNode);
 		if(node != null){
-			setDomain(new XMLDomains(node, this));	
+			setDomains(new XMLDomains(node, this));	
 		}
 		
 		log.debug(INITIALLIZED_NAME_VALUE, "XMLColumn", getName());
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObjectID() {
-		return objectID;
-	}
-
-	public void setObjectID(String objectID) {
-		this.objectID = objectID;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public String getCreator() {
-		return creator;
-	}
-
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
-
-	public String getModificationDate() {
-		return modificationDate;
-	}
-
-	public void setModificationDate(String modificationDate) {
-		this.modificationDate = modificationDate;
-	}
-
-	public String getModifier() {
-		return modifier;
-	}
-
-	public void setModifier(String modifier) {
-		this.modifier = modifier;
-	}
-
-	public String getHistory() {
-		return history;
-	}
-
-	public void setHistory(String history) {
-		this.history = history;
-	}
-
-	public String getDataType() {
-		return dataType;
-	}
-
-	public void setDataType(String dataType) {
-		this.dataType = dataType;
-	}
-
-	public String getLength() {
-		return length;
-	}
-
-	public void setLength(String length) {
-		this.length = length;
-	}
-
-	public String getPrecision() {
-		return precision;
-	}
-
-	public void setPrecision(String precision) {
-		this.precision = precision;
-	}
-
-	public String getColumnMandatory() {
-		return columnMandatory;
-	}
-
-	public void setColumnMandatory(String columnMandatory) {
-		this.columnMandatory = columnMandatory;
-	}
-
-	public XMLDomains getDomain() {
-		return domain;
-	}
-
-	public void setDomain(XMLDomains domain) {
-		this.domain = domain;
-	}
-
-	public XMLColumns getSuperColumns() {
-		return superColumns;
-	}
-
-	public void setSuperColumns(XMLColumns superColumns) {
-		this.superColumns = superColumns;
-	}
 	
+	/*
+	 * getter and setter.
+	 */
+	public String getId() {
+    	return id;
+    }
+	public void setId(String id) {
+    	this.id = id;
+    }
+	public String getObjectID() {
+    	return objectID;
+    }
+	public void setObjectID(String objectID) {
+    	this.objectID = objectID;
+    }
+	public String getCreationDate() {
+    	return creationDate;
+    }
+	public void setCreationDate(String creationDate) {
+    	this.creationDate = creationDate;
+    }
+	public String getCreator() {
+    	return creator;
+    }
+	public void setCreator(String creator) {
+    	this.creator = creator;
+    }
+	public String getModificationDate() {
+    	return modificationDate;
+    }
+	public void setModificationDate(String modificationDate) {
+    	this.modificationDate = modificationDate;
+    }
+	public String getModifier() {
+    	return modifier;
+    }
+	public void setModifier(String modifier) {
+    	this.modifier = modifier;
+    }
+	public String getHistory() {
+    	return history;
+    }
+	public void setHistory(String history) {
+    	this.history = history;
+    }
+	public String getColumnMandatory() {
+    	return columnMandatory;
+    }
+	public void setColumnMandatory(String columnMandatory) {
+    	this.columnMandatory = columnMandatory;
+    }
+	public XMLColumns getSuperColumns() {
+    	return superColumns;
+    }
+	public void setSuperColumns(XMLColumns superColumns) {
+    	this.superColumns = superColumns;
+    }
+	public XMLDomains getDomains() {
+    	return domains;
+    }
+	public void setDomains(XMLDomains domains) {
+    	this.domains = domains;
+    }	
 }

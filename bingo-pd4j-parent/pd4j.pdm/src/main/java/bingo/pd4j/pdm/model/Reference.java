@@ -15,25 +15,44 @@
  */
 package bingo.pd4j.pdm.model;
 
+import bingo.pd4j.pdm.model.xml.XMLReference;
+
 /**
  * <code>{@link Reference}</code>
  *
- * TODO : document me
+ * represents a Reference in powerdesigner.
  *
  * @author Calvin Chen
  */
 public class Reference {
 
+	/*
+	 * original xml nodes.
+	 */
 	private String name;
 	private String code;
 	private String comment;
-	private Table parentTable;
 	private String parentRole;
-	private Table childTable;
 	private String childRole;
+	
+	/*
+	 * added attributes.
+	 */
+	private Table parentTable;
+	private Table childTable;
 	private Key parentKey;
 	private Column parentTableColumn;
 	private Column childTableColumn;
+	
+	/*
+	 * inner subclass.
+	 */
+	@SuppressWarnings("unused")
+    private XMLReference xmlReference;
+	
+	/*
+	 * getter and setter.
+	 */
 	public String getName() {
 		return name;
 	}

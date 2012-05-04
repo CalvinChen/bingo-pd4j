@@ -40,9 +40,7 @@ import bingo.pd4j.pdm.model.xml.XMLTables;
  * @author Calvin Chen
  */
 public class PDM {
-	/**
-	 * 
-	 */
+
 	private static final int DEFAULT_ZERO_BY_POWERDESIGNER = 0;
 
 	private Document document;
@@ -58,7 +56,7 @@ public class PDM {
 	private XMLPackages xmlPackages;
 	
 	/**
-	 * init a pdm model by using a xml document.
+	 * init a {@link PDM} by using a xml {@link Document}.
 	 */
 	public PDM(Document document) {
 		this.document = document;
